@@ -1,6 +1,5 @@
 /* eslint-disable camelcase */
-require('dotenv').config();
-const connection = require('../db-config');
+const connection = require('./db-config');
 const express = require('express');
 const app = express();
 const axios = require('axios');
@@ -47,11 +46,12 @@ app.get('/books', (req, res, next) => {
     });
 });
 
-app.get('/books/boxId/:Id', (req, res, next) => {
+app.get('/boxes/:idBox/books', (req, res, next) => {
   connection
     .promise()
     .query(
-      `SELECT id, title, author, isbn, editions, publication_year, pages_nbr, synopsis, picture, note, box_number, cond, to_borrow, to_delete, out_of_stock FROM book WHERE box_number = ${req.params.Id} AND out_of_stock = 0 ORDER BY id DESC`
+      'SELECT id, title, author, isbn, editions, publication_year, pages_nbr, synopsis, picture, note, box_number, cond, to_borrow, to_delete, out_of_stock FROM book WHERE box_number = ? AND out_of_stock = 0 ORDER BY id DESC',
+      [req.params.idBox]
     )
     .then((result) => {
       res.status(200).json(result[0]);
@@ -61,15 +61,56 @@ app.get('/books/boxId/:Id', (req, res, next) => {
     });
 });
 
-app.get('/books/isbn/:isbn', (req, res, next) => {
+app.get('/books/:isbn/:boxId/:note/:cond', (req, res, next) => {
   connection
     .promise()
     .query(
-      `SELECT title, author, isbn, editions, publication_year, pages_nbr, synopsis, picture, note, box_number, cond, to_borrow, to_delete, out_of_stock FROM book WHERE isbn=${req.params.isbn}`
+      'SELECT title, author, isbn, editions, publication_year, pages_nbr, synopsis, picture, note, box_number, cond, to_borrow, to_delete, out_of_stock FROM book WHERE isbn= ?',
+      [req.params.isbn]
     )
     .then((result) => {
       if (result[0].length > 0) {
-        res.status(200).json(result[0][0]);
+        const book = {
+          title: result[0][0].title,
+          editions: result[0][0].editions,
+          author: result[0][0].author,
+          publication_year: result[0][0].publication_year,
+          picture: result[0][0].picture || null,
+          synopsis: result[0][0].synopsis,
+          pages_nbr: result[0][0].pages_nbr,
+          isbn: result[0][0].isbn,
+          box_number: req.params.boxId,
+          cond: req.params.cond,
+          note: req.params.note,
+        };
+        res.status(200).json([book.author, book.editions]);
+        connection
+          .promise()
+          .query(
+            'INSERT INTO book(title, editions, author, publication_year, synopsis, picture, pages_nbr, note, cond, box_number, isbn, to_borrow, to_delete, out_of_stock) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            [
+              book.title,
+              book.editions,
+              book.author,
+              book.publication_year,
+              book.synopsis,
+              book.picture,
+              book.pages_nbr,
+              book.note,
+              book.cond,
+              book.box_number,
+              book.isbn,
+              0,
+              0,
+              0,
+            ]
+          )
+          .then((result) => {
+            console.log('Book successfully added to database');
+          })
+          .catch(() => {
+            console.log('Error adding book');
+          });
       } else {
         axios
           .get(
@@ -81,7 +122,7 @@ app.get('/books/isbn/:isbn', (req, res, next) => {
             if (data.items[0].volumeInfo.imageLinks) {
               img = data.items[0].volumeInfo.imageLinks.smallThumbnail;
             }
-            const newBook = {
+            const book = {
               title: data.items[0].volumeInfo.title,
               editions: data.items[0].volumeInfo.publisher,
               author: data.items[0].volumeInfo.authors[0],
@@ -90,9 +131,41 @@ app.get('/books/isbn/:isbn', (req, res, next) => {
                 4
               ),
               picture: img || null,
+              synopsis: data.items[0].volumeInfo.description,
               pages_nbr: data.items[0].volumeInfo.pageCount,
+              isbn: req.params.isbn,
+              box_number: req.params.boxId,
+              cond: req.params.cond,
+              note: req.params.note,
             };
-            res.status(200).json(newBook);
+            res.status(200).json([book.author, book.editions]);
+            connection
+              .promise()
+              .query(
+                'INSERT INTO book(title, editions, author, publication_year, synopsis, picture, pages_nbr, note, cond, box_number, isbn, to_borrow, to_delete, out_of_stock) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                [
+                  book.title,
+                  book.editions,
+                  book.author,
+                  book.publication_year,
+                  book.synopsis,
+                  book.picture,
+                  book.pages_nbr,
+                  book.note,
+                  book.cond,
+                  book.box_number,
+                  book.isbn,
+                  0,
+                  0,
+                  0,
+                ]
+              )
+              .then((result) => {
+                console.log('Book successfully added to database');
+              })
+              .catch(() => {
+                res.status(500).send('Error adding book');
+              });
           })
           .catch(() => {
             console.log('error with axios');
@@ -104,7 +177,7 @@ app.get('/books/isbn/:isbn', (req, res, next) => {
     });
 });
 
-app.post('/book', (req, res, next) => {
+app.post('/books', (req, res, next) => {
   // eslint-disable-next-line camelcase
   const {
     title,
@@ -151,7 +224,7 @@ app.post('/book', (req, res, next) => {
     });
 });
 
-app.put('/books/id/:id', (req, res) => {
+app.put('/books/:id', (req, res) => {
   const { id } = req.params;
   connection
     .promise()
