@@ -83,7 +83,8 @@ app.get('/books/:isbn/:boxId/:note/:cond', (req, res, next) => {
           cond: req.params.cond,
           note: req.params.note,
         };
-        res.status(200).json([book.author, book.editions]);
+        const resp = { author: book.author, title: book.title };
+        res.status(200).json(resp);
         connection
           .promise()
           .query(
@@ -109,7 +110,7 @@ app.get('/books/:isbn/:boxId/:note/:cond', (req, res, next) => {
             console.log('Book successfully added to database');
           })
           .catch(() => {
-            console.log('Error adding book');
+            res.status(500).send('first Error adding book');
           });
       } else {
         axios
@@ -138,7 +139,8 @@ app.get('/books/:isbn/:boxId/:note/:cond', (req, res, next) => {
               cond: req.params.cond,
               note: req.params.note,
             };
-            res.status(200).json([book.author, book.editions]);
+            const resp = { author: book.author, title: book.title };
+            res.status(200).json(resp);
             connection
               .promise()
               .query(
@@ -168,7 +170,7 @@ app.get('/books/:isbn/:boxId/:note/:cond', (req, res, next) => {
               });
           })
           .catch(() => {
-            console.log('error with axios');
+            res.status(500).send('Error with axios');
           });
       }
     })
