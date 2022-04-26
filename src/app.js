@@ -32,6 +32,31 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 
+app.get('/boxes', (req, res) => {
+  connection
+    .promise()
+    .query('SELECT * FROM boxes ORDER BY id DESC')
+    .then((result) => {
+      res.status(200).json(result);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Something wrong happened x( ');
+    });
+});
+app.get('/boxes/:id', async (req, res) => {
+  try {
+    const [[product]] = await connection
+      .promise()
+      .query('SELECT * FROM boxes WHERE id = ?', [req.params.id]);
+
+    res.send(product);
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
+});
+
 app.get('/books', (req, res, next) => {
   connection
     .promise()
