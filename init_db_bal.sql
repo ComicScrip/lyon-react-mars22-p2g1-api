@@ -12,7 +12,7 @@ CREATE TABLE `boxes` (
 INSERT INTO boxes (`adresse`, `CP`, `lat`, `long`, `ville`, `quantity`)
 VALUES ("11 Rue Général de Gaulle", "69530", "45.6753398", "4.7650074", "Brignais", "8"),
 ("3 Avenue de la Gare", "69530", "45.6739991", "4.7633181", "Brignais", "4"),
-("Place Baptiste Curial", "69500", "45.7374217", "4.916939", "Bron", "6"),
+("Place Baptiste Curial", "69500", "45.7374217", "4.916939", "Bron", "5"),
 ("59 Boulevard Pinel", "69500", "45.7474263", "4.8997208", "Bron", "1"),
 ("Place George Sand", "69500", "45.7553103", "4.8882637", "Bron", "5"),
 ("195 Avenue Franklin Roosevelt", "69500", "45.7321415", "4.9132846", "Bron", "0"),

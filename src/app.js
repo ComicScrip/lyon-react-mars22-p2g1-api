@@ -86,6 +86,29 @@ app.get('/boxes/:idBox/books', (req, res, next) => {
     });
 });
 
+app.patch('/boxes/:idBox', (req, res) => {
+  const { action } = req.query;
+  let sqlRequest = 'UPDATE boxes SET quantity = quantity';
+  let retour = '';
+  if (action === 'add') {
+    sqlRequest += ' + 1 WHERE id = ?';
+    retour = 'plus';
+  }
+  if (action === 'delete') {
+    sqlRequest += ' - 1 WHERE id = ?';
+    retour = 'moins';
+  }
+  connection
+    .promise()
+    .query(sqlRequest, [req.params.idBox])
+    .then(() => {
+      res.status(200).send(retour);
+    })
+    .catch(() => {
+      res.sendStatus(500);
+    });
+});
+
 app.get('/books/:isbn/:boxId/:note/:cond', (req, res, next) => {
   connection
     .promise()
