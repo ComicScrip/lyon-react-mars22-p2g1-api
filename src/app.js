@@ -109,7 +109,7 @@ app.patch('/boxes/:idBox', (req, res, next) => {
     });
 });
 
-app.get('/books/:isbn/:boxId/:note/:cond', (req, res, next) => {
+app.post('/books/:isbn/:boxId/:note/:cond', (req, res, next) => {
   connection
     .promise()
     .query(
