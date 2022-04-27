@@ -86,7 +86,7 @@ app.get('/boxes/:idBox/books', (req, res, next) => {
     });
 });
 
-app.patch('/boxes/:idBox', (req, res) => {
+app.patch('/boxes/:idBox', (req, res, next) => {
   const { action } = req.query;
   let sqlRequest = 'UPDATE boxes SET quantity = quantity';
   let retour = '';
@@ -105,7 +105,7 @@ app.patch('/boxes/:idBox', (req, res) => {
       res.status(200).send(retour);
     })
     .catch(() => {
-      res.sendStatus(500);
+      res.status(500).send('error');
     });
 });
 
