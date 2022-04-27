@@ -35,9 +35,9 @@ app.use(express.json());
 app.get('/boxes', (req, res) => {
   connection
     .promise()
-    .query('SELECT * FROM boxes ORDER BY id DESC')
+    .query('SELECT * FROM boxes ORDER BY id ASC')
     .then((result) => {
-      res.status(200).json(result);
+      res.status(200).json(result[0]);
     })
     .catch((err) => {
       console.error(err);
