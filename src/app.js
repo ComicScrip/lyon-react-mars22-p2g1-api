@@ -32,6 +32,21 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 
+app.get('/book/:id', (req, res, next) => {
+  connection
+    .promise()
+    .query(
+      'SELECT author, title, editions, publication_year, isbn, synopsis, pages_nbr, picture, note, cond FROM book WHERE id = ?',
+      [req.params.id]
+    )
+    .then((result) => {
+      res.status(200).json(result[0][0]);
+    })
+    .catch(() => {
+      res.status(500).send('Error retrieving data from database');
+    });
+});
+
 app.get('/books', (req, res, next) => {
   connection
     .promise()
