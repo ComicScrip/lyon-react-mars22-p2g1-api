@@ -1,0 +1,402 @@
+[
+  {
+    "adresse": "11 Rue G\u00e9n\u00e9ral de Gaulle",
+    "CP": 69530,
+    "lat": "45.6753398",
+    "long": "4.7650074",
+    "boite": 0,
+    "ville": "Brignais"
+  },
+  {
+    "adresse": "3 Avenue de la Gare",
+    "CP": 69530,
+    "lat": "45.6739991",
+    "long": "4.7633181",
+    "boite": 1,
+    "ville": "Brignais"
+  },
+  {
+    "adresse": "Place Baptiste Curial",
+    "CP": 69500,
+    "lat": "45.7374217",
+    "long": " 4.916939",
+    "boite": 2,
+    "ville": "Bron"
+  },
+  {
+    "adresse": "59 Boulevard Pinel",
+    "CP": 69500,
+    "lat": "45.7474263",
+    "long": " 4.8997208",
+    "boite": 3,
+    "ville": "Bron"
+  },
+  {
+    "adresse": "Place George Sand",
+    "CP": 69500,
+    "lat": "45.7553103",
+    "long": " 4.8882637",
+    "boite": 4,
+    "ville": "Bron"
+  },
+  {
+    "adresse": "195 Avenue Franklin Roosevelt",
+    "CP": 69500,
+    "lat": "45.7321415",
+    "long": " 4.9132846",
+    "boite": 5,
+    "ville": "Bron"
+  },
+  {
+    "adresse": "58 Rue Christian Lacouture",
+    "CP": 69500,
+    "lat": "45.7440725",
+    "long": " 4.910463",
+    "boite": 6,
+    "ville": "Bron"
+  },
+  {
+    "adresse": "95 Boulevard Pinel",
+    "CP": 69500,
+    "lat": "45.7389578",
+    "long": " 4.8963057",
+    "boite": 7,
+    "ville": "Bron"
+  },
+  {
+    "adresse": "51 Rue Coste",
+    "CP": 69300,
+    "lat": "45.7842227",
+    "long": " 4.8330374",
+    "boite": 8,
+    "ville": "Caluire et Cuire"
+  },
+  {
+    "adresse": "1 Place Jules Ferry",
+    "CP": 69300,
+    "lat": "45.7860634",
+    "long": " 4.8325513",
+    "boite": 9,
+    "ville": "Caluire et cuire"
+  },
+  {
+    "adresse": "Place du Vernay",
+    "CP": 69300,
+    "lat": "45.8111523",
+    "long": " 4.8527781",
+    "boite": 10,
+    "ville": "Caluire et Cuire"
+  },
+  {
+    "adresse": "5 Chemin de Cr\u00e9pieux",
+    "CP": 69300,
+    "lat": "45.8007323",
+    "long": " 4.8498163",
+    "boite": 11,
+    "ville": "Caluire et Cuire"
+  },
+  {
+    "adresse": "23 Avenue Paul Doumer",
+    "CP": 69630,
+    "lat": "45.7121632",
+    "long": " 4.7434095",
+    "boite": 12,
+    "ville": "Chaponost"
+  },
+  {
+    "adresse": "62 Rue Oreste Z\u00e9n\u00e9zini",
+    "CP": 69680,
+    "lat": "45.743869",
+    "long": " 4.9701289",
+    "boite": 13,
+    "ville": "Chassieu"
+  },
+  {
+    "adresse": "42 Chemin de Parsonge",
+    "CP": 69570,
+    "lat": "45.8170734",
+    "long": " 4.7561785",
+    "boite": 14,
+    "ville": "Dardilly"
+  },
+  {
+    "adresse": "31 Chemin des Peupliers",
+    "CP": 69570,
+    "lat": "45.8136519",
+    "long": " 4.7584863",
+    "boite": 15,
+    "ville": "Dardilly"
+  },
+  {
+    "adresse": "28 Chemin de Pierre Blanche",
+    "CP": 69570,
+    "lat": "45.8182065",
+    "long": " 4.7497613",
+    "boite": 16,
+    "ville": "Dardilly"
+  },
+  {
+    "adresse": "65 Rue Georges Bizet",
+    "CP": 69150,
+    "lat": "45.7759502",
+    "long": " 4.9668619",
+    "boite": 17,
+    "ville": "D\u00e9cines-Charpieu"
+  },
+  {
+    "adresse": "110 Rue Emile Zola",
+    "CP": 69150,
+    "lat": "45.76382",
+    "long": " 4.953462",
+    "boite": 18,
+    "ville": "D\u00e9cines-Charpieu"
+  },
+  {
+    "adresse": "14 Avenue Jean Mac\u00e9",
+    "CP": 69150,
+    "lat": "45.7688911",
+    "long": " 4.9553565",
+    "boite": 19,
+    "ville": "D\u00e9cines-Charpieu"
+  },
+  {
+    "adresse": "36 Avenue Guy de Collongue",
+    "CP": 69130,
+    "lat": "45.7825382",
+    "long": " 4.7666033",
+    "boite": 20,
+    "ville": "Ecully"
+  },
+  {
+    "adresse": "3 Chemin du Fort",
+    "CP": 69340,
+    "lat": "45.7297901",
+    "long": " 4.7428179",
+    "boite": 21,
+    "ville": "Francheville"
+  },
+  {
+    "adresse": "Place de l'Europe",
+    "CP": 69340,
+    "lat": "45.7386145",
+    "long": " 4.7739971",
+    "boite": 22,
+    "ville": "Francheville"
+  },
+  {
+    "adresse": "1 Place du Bourg",
+    "CP": 69340,
+    "lat": "45.736905",
+    "long": " 4.7640032",
+    "boite": 23,
+    "ville": "francheville"
+  },
+  {
+    "adresse": "16 Rue Yves Farge",
+    "CP": 69700,
+    "lat": "45.5925619",
+    "long": " 4.7672428",
+    "boite": 24,
+    "ville": "Givors"
+  },
+  {
+    "adresse": "3 Place de la Libert\u00e9",
+    "CP": 69700,
+    "lat": "45.5847345",
+    "long": " 4.7753788",
+    "boite": 25,
+    "ville": "Givors"
+  },
+  {
+    "adresse": "9 Rue Constantine",
+    "CP": 69001,
+    "lat": "45.7670693",
+    "long": " 4.8320279",
+    "boite": 26,
+    "ville": "Lyon 1"
+  },
+  {
+    "adresse": "Place Sathonay",
+    "CP": 69001,
+    "lat": "45.7691363",
+    "long": " 4.8301485",
+    "boite": 27,
+    "ville": "Lyon 1"
+  },
+  {
+    "adresse": "3 Quai Jean Moulin",
+    "CP": 69001,
+    "lat": "45.7674337",
+    "long": " 4.8377007",
+    "boite": 28,
+    "ville": "Lyon 1"
+  },
+  {
+    "adresse": "14 Quai Saint Vincent",
+    "CP": 69001,
+    "lat": "45.7679787",
+    "long": " 4.8195187",
+    "boite": 29,
+    "ville": "Lyon 1"
+  },
+  {
+    "adresse": "87 Rue de la R\u00e9publique",
+    "CP": 69002,
+    "lat": "45.7581745",
+    "long": " 4.8346659",
+    "boite": 30,
+    "ville": "Lyon 2"
+  },
+  {
+    "adresse": "1 Place de l'H\u00f4pital",
+    "CP": 69002,
+    "lat": "45.7593263",
+    "long": " 4.8358695",
+    "boite": 31,
+    "ville": "Lyon 2"
+  },
+  {
+    "adresse": "87 Rue de la R\u00e9publique",
+    "CP": 69002,
+    "lat": "45.7581745",
+    "long": " 4.8346659",
+    "boite": 32,
+    "ville": "Lyon 2"
+  },
+  {
+    "adresse": "Rue Jean Fabre",
+    "CP": 69002,
+    "lat": "45.7602682",
+    "long": " 4.8330347",
+    "boite": 33,
+    "ville": "Lyon 2"
+  },
+  {
+    "adresse": "6 Place des Jacobins",
+    "CP": 69003,
+    "lat": "45.7541448",
+    "long": " 4.8535559",
+    "boite": 34,
+    "ville": "Lyon 3"
+  },
+  {
+    "adresse": "Place Guichard",
+    "CP": 69003,
+    "lat": "45.7590482",
+    "long": "4.8473042",
+    "boite": 35,
+    "ville": "Lyon 3"
+  },
+  {
+    "adresse": "7 Rue Auguste Lacroix",
+    "CP": 69003,
+    "lat": "45.7554089",
+    "long": "4.8450388",
+    "boite": 36,
+    "ville": "Lyon 3"
+  },
+  {
+    "adresse": "53 Rue Charles Richard",
+    "CP": 69003,
+    "lat": "45.7495455",
+    "long": "4.888851",
+    "boite": 37,
+    "ville": "Lyon 3"
+  },
+  {
+    "adresse": "30 Boulevard Vivier-Merle",
+    "CP": 69003,
+    "lat": "45.7606813",
+    "long": " 4.8575503",
+    "boite": 38,
+    "ville": "Lyon 3"
+  },
+  {
+    "adresse": "249 rue Vendome",
+    "CP": 69003,
+    "lat": "45.7558726",
+    "long": " 4.8478133",
+    "boite": 39,
+    "ville": "Lyon 3"
+  },
+  {
+    "adresse": "3 Place d Arsonval",
+    "CP": 69003,
+    "lat": "45.7433371",
+    "long": " 4.8794001",
+    "boite": 40,
+    "ville": "Lyon 3"
+  },
+  {
+    "adresse": "7 Place de la Ferrandi\u00e8re",
+    "CP": 69003,
+    "lat": "45.7597289",
+    "long": " 4.8709135",
+    "boite": 41,
+    "ville": "Lyon 3"
+  },
+  {
+    "adresse": "17 Rue Dr Bouchut",
+    "CP": 69003,
+    "lat": "45.7621058",
+    "long": " 4.8557052",
+    "boite": 42,
+    "ville": "Lyon 3"
+  },
+  {
+    "adresse": "3 Place Sainte Anne",
+    "CP": 69003,
+    "lat": "45.7574606",
+    "long": " 4.865301",
+    "boite": 43,
+    "ville": "Lyon 3"
+  },
+  {
+    "adresse": "11 Rue Richan",
+    "CP": 69004,
+    "lat": "45.7802928",
+    "long": "4.836122",
+    "boite": 44,
+    "ville": "Lyon 4"
+  },
+  {
+    "adresse": "35 Quai Joseph Gillet",
+    "CP": 69004,
+    "lat": "45.776331",
+    "long": " 4.8109559",
+    "boite": 45,
+    "ville": "Lyon 4"
+  },
+  {
+    "adresse": "10 Rue de Vauzelless",
+    "CP": 69001,
+    "lat": "45.7729907",
+    "long": " 4.8265258",
+    "boite": 46,
+    "ville": "Lyon 1"
+  },
+  {
+    "adresse": "2 Place Benedict Tessier",
+    "CP": 69005,
+    "lat": "45.7558487",
+    "long": "4.7975989",
+    "boite": 47,
+    "ville": "Lyon 5"
+  },
+  {
+    "adresse": "44 Place Saint Ir\u00e9n\u00e9e",
+    "CP": 69005,
+    "lat": "45.7548904",
+    "long": "4.8124515",
+    "boite": 48,
+    "ville": "Lyon 5"
+  },
+  {
+    "adresse": "163 Avenue Barth\u00e9l\u00e9my Buyer",
+    "CP": 69005,
+    "lat": "45.7629918",
+    "long": " 4.7960166",
+    "boite": 49,
+    "ville": "Lyon 5"
+  }
+]
