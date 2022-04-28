@@ -32,6 +32,60 @@ app.use((req, res, next) => {
 
 app.use(express.json());
 
+app.get('/boxes', (req, res) => {
+  connection
+    .promise()
+    .query('SELECT * FROM boxes ORDER BY id ASC')
+    .then((result) => {
+      res.status(200).json(result[0]);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send('Something wrong happened x( ');
+    });
+});
+
+app.get('/boxes/:id', async (req, res) => {
+  try {
+    const [[product]] = await connection
+      .promise()
+      .query('SELECT * FROM boxes WHERE id = ?', [req.params.id]);
+
+    res.send(product);
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
+});
+
+app.get('/boxes/postalcode/:cp', async (req, res) => {
+  try {
+    const [product] = await connection
+      .promise()
+      .query('SELECT * FROM boxes WHERE CP = ?', [req.params.cp]);
+
+    res.send(product);
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
+});
+
+app.get('/books/:id', (req, res, next) => {
+  connection
+    .promise()
+    .query(
+      'SELECT author, title, editions, publication_year, isbn, synopsis, pages_nbr, picture, note, cond FROM book WHERE id = ?',
+      [req.params.id]
+    )
+    .then((result) => {
+      res.status(200).json(result[0][0]);
+    })
+    .catch(() => {
+      res.status(500).send('Error retrieving data from database');
+    });
+});
+
 app.get('/books', (req, res, next) => {
   connection
     .promise()
@@ -47,6 +101,7 @@ app.get('/books', (req, res, next) => {
 });
 
 app.get('/boxes/:idBox/books', (req, res, next) => {
+  console.log('ok');
   connection
     .promise()
     .query(
@@ -58,6 +113,29 @@ app.get('/boxes/:idBox/books', (req, res, next) => {
     })
     .catch(() => {
       res.status(500).send('Error retrieving data from database');
+    });
+});
+
+app.patch('/boxes/:idBox', (req, res, next) => {
+  const { action } = req.query;
+  let sqlRequest = 'UPDATE boxes SET quantity = quantity';
+  let retour = '';
+  if (action === 'add') {
+    sqlRequest += ' + 1 WHERE id = ?';
+    retour = 'plus';
+  }
+  if (action === 'delete') {
+    sqlRequest += ' - 1 WHERE id = ?';
+    retour = 'moins';
+  }
+  connection
+    .promise()
+    .query(sqlRequest, [req.params.idBox])
+    .then(() => {
+      res.status(200).send(retour);
+    })
+    .catch(() => {
+      res.status(500).send('error');
     });
 });
 
