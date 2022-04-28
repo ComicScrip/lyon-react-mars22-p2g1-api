@@ -125,10 +125,7 @@ app.patch('/boxes/:idBox', (req, res, next) => {
 app.post('/books/:isbn/:boxId/:note/:cond', (req, res, next) => {
   connection
     .promise()
-    .query(
-      'SELECT title, author, isbn, editions, publication_year, pages_nbr, synopsis, picture, note, box_number, cond, to_borrow, to_delete, out_of_stock FROM book WHERE isbn= ?',
-      [req.params.isbn]
-    )
+    .query('SELECT * FROM book WHERE isbn= ?', [req.params.isbn])
     .then((result) => {
       if (result[0].length > 0) {
         const book = {
@@ -143,13 +140,14 @@ app.post('/books/:isbn/:boxId/:note/:cond', (req, res, next) => {
           box_number: req.params.boxId,
           cond: req.params.cond,
           note: req.params.note,
+          selection: 0,
         };
         const resp = { author: book.author, title: book.title };
         res.status(200).json(resp);
         connection
           .promise()
           .query(
-            'INSERT INTO book(title, editions, author, publication_year, synopsis, picture, pages_nbr, note, cond, box_number, isbn, to_borrow, to_delete, out_of_stock) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            'INSERT INTO book(title, editions, author, publication_year, synopsis, picture, pages_nbr, note, cond, box_number, isbn, to_borrow, to_delete, out_of_stock, selection) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
             [
               book.title,
               book.editions,
@@ -162,6 +160,7 @@ app.post('/books/:isbn/:boxId/:note/:cond', (req, res, next) => {
               book.cond,
               book.box_number,
               book.isbn,
+              0,
               0,
               0,
               0,
@@ -199,13 +198,15 @@ app.post('/books/:isbn/:boxId/:note/:cond', (req, res, next) => {
               box_number: req.params.boxId,
               cond: req.params.cond,
               note: req.params.note,
+              out_of_stock: 0,
+              selection: 0,
             };
             const resp = { author: book.author, title: book.title };
             res.status(200).json(resp);
             connection
               .promise()
               .query(
-                'INSERT INTO book(title, editions, author, publication_year, synopsis, picture, pages_nbr, note, cond, box_number, isbn, to_borrow, to_delete, out_of_stock) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+                'INSERT INTO book(title, editions, author, publication_year, synopsis, picture, pages_nbr, note, cond, box_number, isbn, to_borrow, to_delete, out_of_stock, selection) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
                 [
                   book.title,
                   book.editions,
@@ -218,6 +219,7 @@ app.post('/books/:isbn/:boxId/:note/:cond', (req, res, next) => {
                   book.cond,
                   book.box_number,
                   book.isbn,
+                  0,
                   0,
                   0,
                   0,
