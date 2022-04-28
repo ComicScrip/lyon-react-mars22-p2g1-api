@@ -44,6 +44,7 @@ app.get('/boxes', (req, res) => {
       res.status(500).send('Something wrong happened x( ');
     });
 });
+
 app.get('/boxes/:id', async (req, res) => {
   try {
     const [[product]] = await connection
@@ -57,6 +58,18 @@ app.get('/boxes/:id', async (req, res) => {
   }
 });
 
+app.get('/boxes/postalcode/:cp', async (req, res) => {
+  try {
+    const [product] = await connection
+      .promise()
+      .query('SELECT * FROM boxes WHERE CP = ?', [req.params.cp]);
+
+    res.send(product);
+  } catch (err) {
+    console.error(err);
+    res.sendStatus(500);
+  }
+});
 app.get('/books', (req, res, next) => {
   connection
     .promise()
