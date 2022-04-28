@@ -85,6 +85,7 @@ app.get('/books', (req, res, next) => {
 });
 
 app.get('/boxes/:idBox/books', (req, res, next) => {
+  console.log('ok');
   connection
     .promise()
     .query(
