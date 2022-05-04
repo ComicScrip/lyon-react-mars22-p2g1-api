@@ -4,16 +4,6 @@ const express = require('express');
 const app = express();
 const axios = require('axios');
 
-connection.connect((err) => {
-  if (err) {
-    console.error('error connecting: ' + err.stack);
-  } else {
-    console.log(
-      'connected to database with threadId :  ' + connection.threadId
-    );
-  }
-});
-
 app.use((req, res, next) => {
   res.header('Access-Control-Allow-Origin', '*');
   res.header(
