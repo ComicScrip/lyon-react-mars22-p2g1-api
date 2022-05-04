@@ -86,6 +86,19 @@ app.get('/books/:id', (req, res, next) => {
     });
 });
 
+app.get('/books/isbn/:isbn', (req, res, next) => {
+  connection
+    .promise()
+    .query('SELECT box_number FROM book WHERE isbn = ?', [req.params.isbn])
+    .then((result) => {
+      res.status(200).json(result[0]);
+    })
+    .catch((error) => {
+      console.log(error);
+      res.status(500).send('Error retrieving data from database');
+    });
+});
+
 app.get('/books', (req, res, next) => {
   connection
     .promise()
