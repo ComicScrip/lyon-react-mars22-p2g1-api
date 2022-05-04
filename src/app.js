@@ -70,46 +70,36 @@ app.get('/boxes/postalcode/:cp', async (req, res) => {
     res.sendStatus(500);
   }
 });
+
 app.get('/books/search', (req, res) => {
   let sqlRequest = 'SELECT * FROM book';
-  sqlRequest += ' WHERE author || title = ?';
-  connection
-    .promise()
-    .query(sqlRequest, req.query.author)
-    .then((result) => {
-      res.status(200).send(result[0]);
-    })
-    .catch((error) => {
-      res.status(500).send(error);
-    });
+  if ('author' in req.query) {
+    sqlRequest +=
+      " WHERE author LIKE CONCAT ('%', ?, '%') AND out_of_stock = 0";
+    connection
+      .promise()
+      .query(sqlRequest, req.query.author)
+      .then((result) => {
+        res.status(200).send(result[0]);
+      })
+      .catch((error) => {
+        res.status(500).send(error);
+      });
+  }
+  if ('title' in req.query) {
+    sqlRequest += " WHERE title LIKE CONCAT ('%', ?, '%') AND out_of_stock = 0";
+    connection
+      .promise()
+      .query(sqlRequest, req.query.title)
+      .then((result) => {
+        res.status(200).send(result[0]);
+        console.log(result);
+      })
+      .catch((error) => {
+        res.status(500).send(error);
+      });
+  }
 });
-// app.get('/books/search', (req, res) => {
-//   let sqlRequest = 'SELECT * FROM book';
-//   if ('author' in req.query) {
-//     sqlRequest += ' WHERE author = ?';
-//     connection
-//       .promise()
-//       .query(sqlRequest, req.query.author)
-//       .then((result) => {
-//         res.status(200).send(result[0]);
-//       })
-//       .catch((error) => {
-//         res.status(500).send(error);
-//       });
-//   }
-//   if ('title' in req.query) {
-//     sqlRequest += ' WHERE title= ?';
-//     connection
-//       .promise()
-//       .query(sqlRequest, req.query.title)
-//       .then((result) => {
-//         res.status(200).send(result[0]);
-//       })
-//       .catch((error) => {
-//         res.status(500).send(error);
-//       });
-//   }
-// });
 app.get('/books', (req, res, next) => {
   connection
     .promise()
