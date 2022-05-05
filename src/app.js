@@ -75,13 +75,26 @@ app.get('/books/:id', (req, res, next) => {
   connection
     .promise()
     .query(
-      'SELECT author, title, editions, publication_year, isbn, synopsis, pages_nbr, picture, note, cond FROM book WHERE id = ?',
+      'SELECT author, title, editions, publication_year, isbn, synopsis, pages_nbr, picture, note, box_number, cond FROM book WHERE id = ?',
       [req.params.id]
     )
     .then((result) => {
       res.status(200).json(result[0][0]);
     })
     .catch(() => {
+      res.status(500).send('Error retrieving data from database');
+    });
+});
+
+app.get('/books/isbn/:isbn', (req, res, next) => {
+  connection
+    .promise()
+    .query('SELECT box_number FROM book WHERE isbn = ?', [req.params.isbn])
+    .then((result) => {
+      res.status(200).json(result[0]);
+    })
+    .catch((error) => {
+      console.log(error);
       res.status(500).send('Error retrieving data from database');
     });
 });
