@@ -61,17 +61,45 @@ app.get('/boxes/postalcode/:cp', async (req, res) => {
   }
 });
 
+app.get('/books/search', (req, res) => {
+  let sqlRequest = 'SELECT * FROM book';
+  sqlRequest +=
+    " WHERE title LIKE CONCAT ('%', ?, '%') OR author LIKE CONCAT ('%', ?, '%') AND out_of_stock = 0 ";
+  connection
+    .promise()
+    .query(sqlRequest, [req.query.search, req.query.search])
+    .then((result) => {
+      res.status(200).send(result[0]);
+    })
+    .catch((error) => {
+      res.status(500).send(error);
+    });
+});
+
 app.get('/books/:id', (req, res, next) => {
   connection
     .promise()
     .query(
-      'SELECT author, title, editions, publication_year, isbn, synopsis, pages_nbr, picture, note, cond FROM book WHERE id = ?',
+      'SELECT author, title, editions, publication_year, isbn, synopsis, pages_nbr, picture, note, box_number, cond FROM book WHERE id = ?',
       [req.params.id]
     )
     .then((result) => {
       res.status(200).json(result[0][0]);
     })
     .catch(() => {
+      res.status(500).send('Error retrieving data from database');
+    });
+});
+
+app.get('/books/isbn/:isbn', (req, res, next) => {
+  connection
+    .promise()
+    .query('SELECT box_number FROM book WHERE isbn = ?', [req.params.isbn])
+    .then((result) => {
+      res.status(200).json(result[0]);
+    })
+    .catch((error) => {
+      console.log(error);
       res.status(500).send('Error retrieving data from database');
     });
 });
@@ -84,6 +112,18 @@ app.get('/books', (req, res, next) => {
     )
     .then((result) => {
       res.status(200).json(result[0]);
+    })
+    .catch(() => {
+      res.status(500).send('Error retrieving data from database');
+    });
+});
+
+app.get('/books/note/:note', (req, res) => {
+  connection
+    .promise()
+    .query('SELECT * FROM book WHERE note = ?', [req.params.note])
+    .then((result) => {
+      res.status(200).json(result);
     })
     .catch(() => {
       res.status(500).send('Error retrieving data from database');
