@@ -115,6 +115,18 @@ app.get('/books', (req, res, next) => {
     });
 });
 
+app.get('/books/note/:note', (req, res) => {
+  connection
+    .promise()
+    .query('SELECT * FROM book WHERE note = ?', [req.params.note])
+    .then((result) => {
+      res.status(200).json(result);
+    })
+    .catch(() => {
+      res.status(500).send('Error retrieving data from database');
+    });
+});
+
 app.get('/boxes/:idBox/books', (req, res, next) => {
   console.log('ok');
   connection
