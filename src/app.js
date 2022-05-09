@@ -74,7 +74,7 @@ app.get('/boxes/postalcode/:cp', async (req, res) => {
 app.get('/books/search', (req, res) => {
   let sqlRequest = 'SELECT * FROM book';
   sqlRequest +=
-    " WHERE title LIKE CONCAT ('%', LOWER(?), '%') OR author LIKE CONCAT ('%', LOWER(?), '%') AND out_of_stock = 0 ";
+    " WHERE title LIKE CONCAT (LOWER('%'), LOWER(?), LOWER('%')) OR author LIKE CONCAT (LOWER('%'), LOWER(?), LOWER('%')) AND out_of_stock = 0 ";
   connection
     .promise()
     .query(sqlRequest, [req.query.search, req.query.search])
@@ -85,6 +85,24 @@ app.get('/books/search', (req, res) => {
       res.status(500).send(error);
     });
 });
+
+// app.get('/books/search', (req, res) => {
+//   let sqlRequest = 'SELECT * FROM book';
+//   sqlRequest +=
+//     'WHERE title LIKE LOWER(?) OR author LIKE LOWER(?) AND out_of_stock = 0 ';
+//   connection
+//     .promise()
+//     .query(sqlRequest, [
+//       `%${req.query.search.toLowerCase()}%`,
+//       req.query.search,
+//     ])
+//     .then((result) => {
+//       res.status(200).send(result[0]);
+//     })
+//     .catch((error) => {
+//       res.status(500).send(error);
+//     });
+// });
 
 app.get('/books/:id', (req, res, next) => {
   connection
