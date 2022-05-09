@@ -89,10 +89,7 @@ app.get('/books/search', (req, res) => {
 app.get('/books/:id', (req, res, next) => {
   connection
     .promise()
-    .query(
-      'SELECT author, title, editions, publication_year, isbn, synopsis, pages_nbr, picture, note, box_number, cond FROM book WHERE id = ?',
-      [req.params.id]
-    )
+    .query('SELECT * FROM book WHERE id = ?', [req.params.id])
     .then((result) => {
       res.status(200).json(result[0][0]);
     })
