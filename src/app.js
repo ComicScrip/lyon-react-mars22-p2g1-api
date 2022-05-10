@@ -62,10 +62,9 @@ app.get('/boxes/postalcode/:cp', async (req, res) => {
 });
 
 app.get('/books/search', (req, res) => {
-  console.log('searching for ' + req.query.search);
   let sqlRequest = 'SELECT * FROM book';
   sqlRequest +=
-    " WHERE title LIKE CONCAT ('%', LOWER(?), '%') OR author LIKE CONCAT ('%', LOWER(?), '%') AND out_of_stock = 0 ";
+    " WHERE LOWER(title) LIKE CONCAT ('%', LOWER(?), '%') OR LOWER(author) LIKE CONCAT ('%', LOWER(?), '%') AND out_of_stock = 0 ";
   connection
     .promise()
     .query(sqlRequest, [req.query.search, req.query.search])
